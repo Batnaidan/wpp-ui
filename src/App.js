@@ -8,11 +8,13 @@ import Footer from './Components/Footer';
 
 export default function App() {
   const [isLoggedIn, changeLoggedIn] = useState(false);
-
+  const handleLoggedIn = () => {
+    changeLoggedIn(!isLoggedIn);
+  };
   return (
     <div className="App">
       <Header />
-      <Container maxWidth="sm" style={{ height: 'auto' }}>
+      <Container>
         <Login />
       </Container>
       <Footer />

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
-import googleLogo from './Icons/Google__G__Logo.svg';
+import googleLogo from './../Icons/Google__G__Logo.svg';
 import Box from '@material-ui/core/Box';
 
 const CLIENT_ID =
@@ -50,14 +50,14 @@ export default function GoogleSignIn() {
               <button
                 onClick={renderProps.onClick}
                 disabled={renderProps.disabled}
-                className="google-login-button"
+                className="login-with-button"
               >
                 <img
                   src={googleLogo}
                   alt="Google Login"
-                  className="google-icon"
+                  className="login-icon"
                 ></img>
-                <span className="google-text">Sign in with Google</span>
+                <span className="login-text">Sign in with Google</span>
               </button>
             </Box>
           )}
