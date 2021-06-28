@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import clsx from 'clsx';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -54,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function HirerForm() {
+export default function HirerForm({ userInput, handleChange }) {
   const cyrillicAlphabet = [
     'А',
     'Б',
@@ -101,34 +100,13 @@ export default function HirerForm() {
     changeRegisterNo({ ...registerNo, [prop]: event.target.value });
   };
   const classes = useStyles();
-  const [formInput, changeFormInput] = useState({
-    userType: '',
-    lastName: '',
-    firstName: '',
-    registerNo: '',
-    phone: '',
-    emergencyPhone: '',
-    email: '',
-    office: '',
-    subOffice: '',
-    bagHoroo: '',
-    horoolol: '',
-    hothon: '',
-    bair: '',
-    orts: '',
-    toot: '',
-    didAgreedTOS: false,
-  });
-  const handleFormChange = (prop) => (event) => {
-    console.log(prop, event.target.value);
-    changeFormInput({ ...formInput, [prop]: event.target.value });
-  };
+
   const handleClickRegister = async (response) => {
-    console.log(formInput);
+    console.log(userInput);
     const res = await fetch('http://localhost:8000/api/auth/register', {
       method: 'POST',
       body: JSON.stringify({
-        formInput,
+        userInput,
         password: 'root123',
       }),
       headers: {
@@ -146,8 +124,8 @@ export default function HirerForm() {
       <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel>Хэрэглэгч</InputLabel>
         <Select
-          value={formInput.userType}
-          onChange={handleFormChange('userType')}
+          value={userInput.userType}
+          onChange={handleChange('userType')}
           label="Хэрэглэгч"
           className={classes.userType}
           // input={<BootstrapInput />}
@@ -164,17 +142,17 @@ export default function HirerForm() {
       <hr />
       <div className={classes.personalInfo}>
         <TextField
-          value={formInput.lastName}
+          value={userInput.lastName}
           label="Овог"
-          onChange={handleFormChange('lastName')}
+          onChange={handleChange('lastName')}
           variant="outlined"
           className={classes.formControl}
           size="small"
         />
         <TextField
-          value={formInput.firstName}
+          value={userInput.firstName}
           label="Нэр"
-          onChange={handleFormChange('firstName')}
+          onChange={handleChange('firstName')}
           variant="outlined"
           className={classes.formControl}
           size="small"
@@ -225,27 +203,27 @@ export default function HirerForm() {
       <hr />
       <div className={classes.personalInfo}>
         <TextField
-          value={formInput.phone}
+          value={userInput.email}
+          label="И-мэйл хаяг"
+          onChange={handleChange('email')}
+          variant="outlined"
+          className={classes.formControl}
+          size="small"
+        />
+        <TextField
+          value={userInput.phone}
           label="Утас"
-          onChange={handleFormChange('phone')}
+          onChange={handleChange('phone')}
           helperText="Утасны дугаар"
           variant="outlined"
           className={classes.formControl}
           size="small"
         />
         <TextField
-          value={formInput.emergencyPhone}
+          value={userInput.emergencyPhone}
           label="Утас"
-          onChange={handleFormChange('emergencyPhone')}
+          onChange={handleChange('emergencyPhone')}
           helperText="Яаралтай үед холбоо барих дугаар"
-          variant="outlined"
-          className={classes.formControl}
-          size="small"
-        />
-        <TextField
-          value={formInput.email}
-          label="И-мэйл хаяг"
-          onChange={handleFormChange('email')}
           variant="outlined"
           className={classes.formControl}
           size="small"

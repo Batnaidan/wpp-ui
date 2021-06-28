@@ -10,11 +10,25 @@ import HirerForm from './HirerForm';
 
 export default function Login() {
   const [userInput, changeInput] = useState({
+    userType: '',
+    lastName: '',
+    firstName: '',
     email: '',
     password: '',
-    first_name: '',
-    last_name: '',
+    picture: '',
     showPassword: false,
+    registerNo: '',
+    phone: '',
+    emergencyPhone: '',
+    office: '',
+    subOffice: '',
+    bagHoroo: '',
+    horoolol: '',
+    hothon: '',
+    bair: '',
+    orts: '',
+    toot: '',
+    didAgreedTOS: false,
   });
 
   const handleChange = (prop) => (event) => {
@@ -30,7 +44,6 @@ export default function Login() {
   const handleClickSignup = () => {
     changeClick('signup');
   };
-
   switch (whatClick) {
     case 'email':
       return (
@@ -45,7 +58,7 @@ export default function Login() {
     case 'signup':
       return (
         <div className="register-wrapper">
-          <HirerForm />
+          <HirerForm userInput={userInput} handleChange={handleChange} />
         </div>
       );
     default:
@@ -53,7 +66,11 @@ export default function Login() {
         <div className="login-wrapper">
           <div className="login-container">
             <FacebookSignIn />
-            <GoogleSignIn />
+            <GoogleSignIn
+              userInput={userInput}
+              changeInput={changeInput}
+              handleClickSignup={handleClickSignup}
+            />
             <hr className="h-line"></hr>
             <TextField
               value={userInput.email}

@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import React, { useEffect } from 'react';
+import { GoogleLogin } from 'react-google-login';
 import googleLogo from './../Icons/Google__G__Logo.svg';
 import Box from '@material-ui/core/Box';
 
 const CLIENT_ID =
   '191957550253-mv33rqsj53dbkdk92r88a53s5tn04hf4.apps.googleusercontent.com';
 
-export default function GoogleSignIn() {
-  const [didLoad, setLoad] = useState(false);
-  const [userData, setData] = useState(null);
-
+export default function GoogleSignIn({
+  userInput,
+  changeInput,
+  handleClickSignup,
+}) {
   const handleLogin = async (response) => {
     const res = await fetch('http://localhost:8000/api/auth/google', {
       method: 'POST',
@@ -22,24 +23,26 @@ export default function GoogleSignIn() {
     });
     const data = await res.json();
     console.log(data);
-    setData(data);
-    setLoad(true);
+    changeInput({
+      ...userInput,
+      email: data.payload.email,
+      firstName: data.payload.firstName,
+      lastName: data.payload.lastName,
+      picture: data.payload.picture,
+    });
+    handleClickSignup();
+    // changeClick('signup');
   };
-  const handleLogout = async (response) => {
-    setLoad(false);
-  };
+  useEffect(() => {
+    console.log('UserInput =>', userInput);
+  }, [userInput]);
   return (
     <div>
-      {didLoad ? (
+      {userInput.didLoginWithService ? (
         <div>
-          <GoogleLogout
-            clientId={CLIENT_ID}
-            buttonText={'Logout'}
-            onLogoutSuccess={handleLogout}
-          />
-          <img src={userData.payload.picture} alt={userData.payload.name}></img>
-          <h3>{userData.payload.name}</h3>
-          <h3>{userData.payload.email}</h3>
+          <img src={userInput.picture} alt={userInput.first_name}></img>
+          <h3>{userInput.first_name}</h3>
+          <h3>{userInput.email}</h3>
         </div>
       ) : (
         <GoogleLogin
