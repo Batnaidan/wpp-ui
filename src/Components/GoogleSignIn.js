@@ -37,7 +37,7 @@ export default function GoogleSignIn() {
             buttonText={'Logout'}
             onLogoutSuccess={handleLogout}
           />
-          <img src={userData.payload.picture} alt="userpicture"></img>
+          <img src={userData.payload.picture} alt={userData.payload.name}></img>
           <h3>{userData.payload.name}</h3>
           <h3>{userData.payload.email}</h3>
         </div>
