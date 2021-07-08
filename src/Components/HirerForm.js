@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -9,13 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import InputBase from '@material-ui/core/InputBase';
 
-const BootstrapInput = withStyles((theme) => ({
-  input: {
-    padding: '5px 10px 5px 10px',
-  },
-}))(InputBase);
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -107,7 +101,6 @@ export default function HirerForm({ userInput, handleChange }) {
       method: 'POST',
       body: JSON.stringify({
         userInput,
-        password: 'root123',
       }),
       headers: {
         'Content-Type': 'application/json',

@@ -7,6 +7,7 @@ import FacebookSignIn from './FacebookSignIn';
 import GoogleSignIn from './GoogleSignIn';
 import EmailSignIn from './EmailSignIn';
 import HirerForm from './HirerForm';
+import BiderForm from './BiderForm';
 
 export default function Login() {
   const [userInput, changeInput] = useState({
@@ -58,7 +59,8 @@ export default function Login() {
     case 'signup':
       return (
         <div className="register-wrapper">
-          <HirerForm userInput={userInput} handleChange={handleChange} />
+          {/* <HirerForm userInput={userInput} handleChange={handleChange} /> */}
+          <BiderForm userInput={userInput} handleChange={handleChange} />
         </div>
       );
     default:
